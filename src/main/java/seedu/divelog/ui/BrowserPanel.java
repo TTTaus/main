@@ -80,7 +80,7 @@ public class BrowserPanel extends UiPart<Region> {
     public void freeResources() {
 
     }
-    private void loadMyTimeNow(){
+    private void loadMyTimeNow() {
         dateTime.setText(String.format(FORMAT_TIME_NOW, dateTimeSend()));
     }
 
