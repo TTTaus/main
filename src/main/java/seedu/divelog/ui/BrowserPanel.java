@@ -1,9 +1,8 @@
 package seedu.divelog.ui;
 
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.util.logging.Logger;
 
@@ -78,7 +77,7 @@ public class BrowserPanel extends UiPart<Region> {
         dateTime.setText(String.format(FORMAT_TIME_NOW, dateTimeSend()));
     }
 
-    public void freeResources(){
+    public void freeResources() {
 
     }
     private void loadMyTimeNow(){
@@ -90,8 +89,10 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadDivePage(event.getNewSelection());
     }
-
-    private String dateTimeSend(){
+    /**
+     * Renders the current date time information
+     */
+    private String dateTimeSend() {
         Date d = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY hh:mmaa");
         String dateTimeNow = dateFormat.format(d);
