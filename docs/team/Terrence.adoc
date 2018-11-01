@@ -3,16 +3,23 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: DiveLor
+== PROJECT: DiveLog
 
 ---
 
 == Overview
+The DiveLog application is a Java-based desktop application that is used as a dive log for divers to track their dives. The DiveLog provides a simple way for divers to input details of their dives such as the duration they spent at a particular depth and location of their dives. The application will help to calculate the pressure group that their body is in right now, so that they are more aware of themselves and plan their future dives sessions safely.
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+//can put as footnote
+The pressure group, or a dive profile is a description of a diver's pressure exposure over time. The intended dive profile is useful as a planning tool as an indication of the risks of decompression sickness and oxygen toxicity for the exposure, and also for estimating the volume of open-circuit breathing gas needed for a planned dive, as these depend in part upon the depth and duration of the dive.
+
+//or:
+//This document (PPP) is done to showcase my ability to work in a team, my project contributions and ability to perform continuous integration via git.
+This project is undertaken as part of the CS2101 and CS2113T twinned modules in NUS as part of our undergraduate degree requirement. The DiveLog is implemented by morphing a the provided addressbook-level4 project.
 
 == Summary of contributions
-
+//highlights:
+//talks about the technical challenge that we learnt in order to implement this
 * *Major enhancement*: added *the ability to undo/redo previous commands*
 ** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
 ** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
