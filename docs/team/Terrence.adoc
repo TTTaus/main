@@ -20,7 +20,7 @@ This project is undertaken as part of the CS2101 and CS2113T twinned modules in 
 == Summary of contributions
 //highlights:
 //talks about the technical challenge that we learnt in order to implement this
-//"We considered of how we it could make it more user friendly by looking at it from the user's POV, the colour will be a fast way for user to see the risk level."
+//"we considered of how we could make it more user friendly by looking at it from the user's POV, the colour will be a fast way for the user to see the risk level."
 * *Major enhancement*: added *the ability to undo/redo previous commands*
 ** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
 ** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
@@ -61,7 +61,6 @@ _{you can add/remove categories in the list above}_
 
 
 == Contributions to the Developer Guide
-
 //A short description of the function
 //how the system works
 //how the parts work
