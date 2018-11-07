@@ -83,11 +83,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                             pressureGroupAtEnd, location, depthProfile, timezone);
             return new AddCommand(dive);
         } catch (JSONException e) {
-            throw new ParseException(Messages.MESSAGE_INTERNAL_ERROR);
+            throw new ParseException(Messages.MESSAGE_ERROR_LIMIT_EXCEED);
         } catch (LimitExceededException l) {
             throw new ParseException(Messages.MESSAGE_ERROR_LIMIT_EXCEED);
         } catch (Exception e) {
-            throw new ParseException(Messages.MESSAGE_INTERNAL_ERROR);
+            throw new ParseException(Messages.MESSAGE_ERROR_LIMIT_EXCEED);
         }
 
     }
