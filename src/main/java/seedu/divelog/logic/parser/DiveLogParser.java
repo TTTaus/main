@@ -12,6 +12,7 @@ import seedu.divelog.logic.commands.DeleteCommand;
 import seedu.divelog.logic.commands.EditCommand;
 import seedu.divelog.logic.commands.ExitCommand;
 import seedu.divelog.logic.commands.ExitPlanningCommand;
+import seedu.divelog.logic.commands.ExportCommand;
 import seedu.divelog.logic.commands.FindCommand;
 import seedu.divelog.logic.commands.HelpCommand;
 import seedu.divelog.logic.commands.HistoryCommand;
@@ -103,6 +104,8 @@ public class DiveLogParser {
         case SetUnitsCommand.COMMAND_WORD:
             return new SetUnitsCommandParser().parse(arguments);
 
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommand();
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);

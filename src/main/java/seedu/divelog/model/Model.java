@@ -120,4 +120,8 @@ public interface Model {
      * Returns Planner Count to be undone
      */
     int getPlannerCount();
+    /**
+     * exports all dives to a csv file
+     */
+    void exportAll();
 }
