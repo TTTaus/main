@@ -35,7 +35,7 @@ public class PressureGroupLogic {
         return newPg;
     }
     /**
-     * Calculates the pressure group given depth and minutes spent at depth for repeat dives on that day.
+     * Calculates the pressure group given depth and minutes spent at depth for repetitive dives.
      *
      * @param depth {@code DepthProfile} in metres, the deepest point which the diver descends for the dive
      * @param actualBottomTime in minutes which the diver spent underwater
