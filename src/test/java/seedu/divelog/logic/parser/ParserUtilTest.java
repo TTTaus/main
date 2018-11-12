@@ -13,6 +13,7 @@ import org.junit.rules.ExpectedException;
 import seedu.divelog.logic.parser.exceptions.ParseException;
 import seedu.divelog.model.dive.DepthProfile;
 
+
 public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 

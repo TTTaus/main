@@ -18,11 +18,11 @@ By: `Team CS2113-AY1819S1-W13-2`      Since: `Aug 2018`      Licence: `M
 
 == Introduction
 
-Divelog is a digital dive log for planning and tracking dives that aims to simplify safe dive planning, logging and calculations.
-Divelog provides a simple way for underwater divers to input details of their dives such as the time they spent at a particular depth, and Divelog will keep track of their nitrogen levels.
+Divelog is a digital dive log for planning and tracking recreational (no decompression) dives that aims to simplify safe dive planning, logging and calculations.
+Divelog provides a simple way for underwater recreational divers to input details of their dives such as the time they spent at a particular depth, and Divelog will keep track of their nitrogen levels.
 This allows divers to plan their next trip safely. +
 
-We have adopted the <<PADI>> dive tables standards to calculate pressure groups for individual dives. In addition, we are also able to determine if the dive is the first dive or a repeat dive for the day.
+We have adopted the <<PADI>> dive tables standards to calculate pressure groups for individual recreational dives. In addition, we are also able to determine if the dive is the first dive or a repetitive dive. Do not attempt to use Divelog for planning decompression dives.
 
 Pressure groups are made up of an alphabet, between A to Z, which marks the nitrogen concentration within a diver ("A" corresponds to a scenario where the diver is almost free of nitrogen, whilst "Z" corresponds to a scenario where the diver has dangerously excess of Nitrogen).
 As of v1.4, the pressure groups are automatically calculated across all dives. You only need to enter the location, depth and the time of the the dive. Following which, the pressure groups of all dives are automatically calculated and updated.
@@ -30,7 +30,7 @@ The system will also verify that the dives are safe before allowing you to add a
 We are still working on the sortby
 `<<sortby>>` feature coming in the upcoming release v2.0. +
 
-For more information on pressure groups, you can find out more over at `<<pressure_groups>>` and  `<<FAQ>>`.
+For more information on pressure groups and the definitions of common diving terms used, you can find out more over at `<<pressure_groups>>`, `<<definitions_review>>` and in  `<<FAQ>>`.
 
 == Quick Start
 
@@ -49,6 +49,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 +++ <details><summary> +++
 Click to view screenshot for location of command box
 +++ </summary><div> +++
+
 image::UGSS_Ui_command.png[width="800"]
 Diagram 2: Command Box location
 +++ </div></details> +++
@@ -61,12 +62,14 @@ Diagram 2: Command Box location
 
 Confused by our User Guide? Our guide is written following the below few guidelines.
 
+* Some commands have an alias, which you can also use to execute the command
+** e.g. to find out about your current pressure group status and safe flight recommendation information, you can type either `currentpg` or `cpg`.
 * Words in `UPPER_CASE` are the parameters to be supplied by you, the user.
 ** e.g. in `add l/LOCATION`, `LOCATION` is a parameter which can be used as `add l/Sentosa`.
 * Items in square brackets are optional
 ** e.g `l/LOCATION [tz/TIMEZONE]` can be used as `l/Bali tz/+8` or as `l/Bali`.
 * Parameters can be entered in any order
-** e.g. if the command specifies `pg/A d/10`, `d/10 pg/A` is also acceptable.
+** e.g. if the command specifies `l/Sentosa, Singapore d/10`, `d/10 l/Sentosa, Singapore` is also acceptable.
 * A vertical bar `a|b` means either `a` or `b` will work as inputs.
 ====
 
@@ -111,9 +114,9 @@ Format: `add ds/DATE_STARTED ts/TIME_DIVE_STARTED de/DATE_ENDED te/TIME_DIVE_END
 TIP: Words in UPPER_CASE are the parameters, items in SQUARE_BRACKETS are optional. Order of parameters are fixed as per the format above, meaning if you entered the ts/TIME_DIVE_STARTED before the ds/DATE_STARTED,
 the program will not be able to add your dive.
 
-Put a `ts/` before the time started(24 hours format - HHMM), te/time ended (24 hours format - HHMM), d/depth (in metres), l/ location (location name), per dive at v1.0) (optional) and pg/initial pressure group.
+Put a `ts/` before the time started(24 hours format - HHMM), te/time ended (24 hours format - HHMM), d/depth (in metres), l/ location (location name).
 
-_Example:_ `add ds/04082018 ts/0900 de/04082018  te/1020 ss/1015 d/15 l/Bukit Lagoon tz/+8`
+_Example:_ `add ds/04082018 ts/0900 de/04082018 te/1020 ss/1015 d/15 l/Bukit Lagoon tz/+8`
 
 A list of possible command flags is shown below.
 
@@ -169,6 +172,7 @@ Diagram 6: List command
 
 +++ </div></details> +++
 // end::List[]
+
 // tag::edit[]
 === Editing a dive : `edit` [[edit]]
 
@@ -176,7 +180,7 @@ If you made a mistake while adding a new dive, `edit` will come in handy.
 `edits` edits an existing dive session in the Dive Log. +
 The only parameters you have to input are the data of that specific dive session at `INDEX`
 
-Format: `edit INDEX [ts/TIME_START] [te/TIME_END] [ss/SAFETY_STOP_TIME] [d/DEPTH] [pg/PG_AT_START] [l/LOCATION]...`
+Format: `edit INDEX [ts/TIME_START] [te/TIME_END] [ss/SAFETY_STOP_TIME] [d/DEPTH] [l/LOCATION]...`
 
 ****
 * Edits the dive at the specified `INDEX`. The index refers to the index number shown in the displayed dive list. The index *must be a positive integer* 1, 2, 3, ...
@@ -185,7 +189,7 @@ Format: `edit INDEX [ts/TIME_START] [te/TIME_END] [ss/SAFETY_STOP_TIME] [d/DEPTH
 ****
 
 Examples:
-`edit 1 pge/F l/Tioman`
+`edit 1 l/Tioman d/10`
 
 NOTE: All data provided must comply to chronological order, meaning to say Date/Time Started has to be earlier than Date/Time Ended.
 
@@ -216,6 +220,7 @@ Format: `set_units meters|feet` +
 ****
 Example usage: `set_units feet`
 // end::set_units[]
+
 // tag::Find[]
 === Locating dives by location: `find` [[find]]
 Looking for a specific dive? Use `find` to find dives whose location contain any of the given keywords that you input. +
@@ -261,6 +266,7 @@ Deletes the 2nd dive in the Dive Log.
 `delete 1` +
 Deletes the 1st dive in the results of the `find` command.
 // end::Delete[]
+
 // tag::Select[]
 === Selecting a diveSession : `select` [[Select]]
 Selects the dive identified by the index number used in the displayed dive list. +
@@ -316,6 +322,7 @@ Diagram 9: History command
 +++ </div></details> +++
 // end::history
 // tag::undoredo[]
+
 === Undoing previous command : `undo` [[undo]]
 The perfect solution to a slip of the finger. `undo` restores the Dive Log to the state before the previous _undoable_ command was executed. +
 
@@ -378,6 +385,18 @@ TIP: Performed an accidental `clear` of your precious data? Use `undo` to, _you'
      <<undo>>
 
 // end::clear[]
+// tag::currentpg[]
+=== Getting the current pressure group status and safe flight recommendation information : `currentpg`
+
+Knowing your current pressure group, the time needed to reach the next pressure group as well as to the minimum pressure group "A" is vital for divers for them to plan their dives safely. Divelog even knows if you've completed a single or repetitive dive and advises you accordingly on the time and date you can start taking a flight safely. +
+
+Format: `currentpg` +
+ Alias: `cpg` +
+
+TIP: _You'll probably know this_, but you cannot get information of your current pressure group and safe flight recommendations on dives that hasn't occurred yet - like in <<newplan>> when you're planning for future dives! Divelog takes your latest dive that you have completed into consideration automatically.
+
+// end::currentpg[]
+
 // tag::sortby[]
 === Setting parameters to sort dives : `sortby` [[sortby]] [coming in V2.0]
 
@@ -401,7 +420,7 @@ WARNING: You can only use the specific keywords below.
 // end::sortby[]
 // tag::newplan[]
 
-=== Planning Mode : `newplan` or `normalmode`
+=== Planning Mode : `newplan` [[newplan]] or `normalmode`
 
 The planning mode is a temporary space for you to plan trips and to simulate dives. This is especially important if you
  are planning on a multiple day diving trip! +
@@ -435,13 +454,15 @@ Worry not! Dive Log  saves all your data in the hard disk *automatically* after 
 
 There is absolutely no need to save manually.
 
-== About Pressure Groups in recreational diving [[pressure_groups]]
+== About Pressure Groups and calculation in recreational diving [[pressure_groups]]
 
 New to diving and to our product? Pressure groups are a crucial part of diving, as it limits the amount of time you can spend underwater. In this section, we will explain how diving and pressure groups are related.
 
 image::PADI_TableOneAndTwo.png[width="790"]
 [[Diagram_10]]Diagram 10: PADI Recreational Dive Planner, Table 1 (No Decompression Limits and Group Designation Table)
 and Table 2 (Surface Interval Credit Table) +
+ +
+ +
 
 image::PADI_TableThree.png[width="790"]
 [[Diagram_11]]Diagram 11: PADI Recreational Dive Planner, Table 3 (Repetitive Dive Timetable)
@@ -453,15 +474,83 @@ Workflow of a recreational diver who wants to check out his/her pressure group:
 .  For the diver's first dive of the day, the diver dives to a depth of 19 metres for 29 minutes. Referring to <<Diagram_10>>, Table 1 (No Decompression Limits and Group Designation Table),
 the diver would find the depth (19) at the top row. There is no 19 metres in the table, so the closest rounded-up value is 20 metres. He would then go down that 20m column until he finds 29 minutes,
 or the closest rounded up value which is 30 minutes. The diver will then draw his finger along the row to the left to match a character, which is "M". His new pressure group is now "M".
-.  For the diver's second and subsequent dives of the day, he would have to refer to table 3 in <<Diagram_11>> (Repetitive Dive Timetable). The diver wants to dive to 10 metres for 15 minutes for his second dive.
-The diver has already surfaced for three hours, which is the minimum time for any pressure group to reach the minimum "A" pressure group, as per Table 2 in <<Diagram_10>> (Surface Interval Credit Table).
-Finding his current pressure group "A" on the top row of Table 3, he would match the depth he wants to dive to (10m), and get the values 10 at the top and 209 at the bottom.
-10 minutes refer the Residual Nitrogen Time (RNT) and 209 minutes refer to the adjusted no decompression limits. The diver has to add the RNT value (10) to his intended/actual diving time (15 minutes), giving a total of 25 minutes
-Total Bottom Time (TBT). Going back to Table 1 in <<Diagram_10>>, for a depth of 10 metres and 25 minutes TBT, his new pressure group would be "C".
+|===
+|*_Try the example above_* by adding the following command into Divelog! Diver starts diving at 7am  at 19 metres depth and ends at 7:29am with a safety stop of 5 minutes. If your add is successful, you will see the following diagram 12 below in Divelog, where the diver's ending pressure group of "M" is prominently displayed.
+|add ds/12112018 ts/0700 de/12112018 te/0729 ss/0724 d/19 l/Sentosa, Singapore tz/+8
+|===
++++ <details><summary> +++
+Click here to view the screenshot for a successful add
++++ </summary><div> +++
+
+image::egDive.JPG[width="790"]
+[[Diagram_12]]Diagram 12: A successful first dive add
++++ </div></details> +++
+ +
+ +
+2.   For the diver's second and subsequent repetitive dives of the day, he would have to refer to table 3 in <<Diagram_11>> (Repetitive Dive Timetable) to find out his total bottom time. The diver wants to dive to 10 metres for 15 minutes for his second dive.
+The diver has already surfaced for three hours, which is the minimum time for any pressure group to reach the minimum "A" pressure group, as per Table 2 in <<Diagram_10>> (Surface Interval Credit Table). However, there will still be residual nitrogen in his body after three hours as long as the diver makes a dive within six hours of his previous dive, and thus he has to find out his residual nitrogen time from the previous dive.
+Finding his current pressure group "A" on the top row of Table 3, he would match the depth he wants to dive to (10m), and get the values 10 at the top (in the white area) and 209 at the bottom (in the blue area).
+10 minutes refer the Residual Nitrogen Time (RNT) and 209 minutes refer to the adjusted no decompression limits. The diver has to add the RNT value (10) to his intended/Actual Bottom Time (ABT) (15 minutes), giving a total of 25 minutes
+Total Bottom Time (TBT). Do pay special attention to this: He will only be diving for 15 minutes, however he has to account for the residual nitrogen time in his body, so his TBT is 25 minutes. Going back to Table 1 in <<Diagram_10>>, for a depth of 10 metres and 25 minutes TBT, his new pressure group would be "C".
+|===
+|*_Try the example above_* by adding the following command into Divelog! Diver ends his first dive at 7:29am and starts his second repetitive dive three hours later at 10:29am. He dives to a depth of 10 metres and ends his dive 15 minutes later, at 10:44am after a safety stop at 10:40am. If your add is successful, you will see the following diagram 13 below in Divelog, where the diver's starting pressure group after resting for three hours of "A" and his ending pressure group after the dive of "C" is prominently displayed.
+|add ds/12112018 ts/1029 de/12112018 te/1044 ss/1040 d/10 l/Sentosa, Singapore tz/+8
+|===
++++ <details><summary> +++
+Click here to view the screenshot for a successful repetitive dive add
++++ </summary><div> +++
+
+image::egDive2.JPG[width="790"]
+[[Diagram_13]]Diagram 13: A successful repetitive dive add
++++ </div></details> +++
+ +
+ +
+
+== Dive Tables Definitions Review [[definitions_review]]
+
+You may have encountered the following terms when reading this document or when using Divelog, or when learning how to use the PADI recreational dive planner. This table provides a quick reference on the definitions on the common diving terminologies used.
+
+|===
+|Diving terminologies |Definitions
+
+|Actual Bottom Time (ABT)
+|In repetitive dives, the total time actually spent under water (in minutes) from the beginning of the descent until the time the diver leaves the depth for a continuous ascent to the safety stop or the surface.
+
+|Adjusted No Decompression Limit
+|The time limit for a repetitive dive that accounts for residual nitrogen, for a particular depth. Found in <<Diagram_11>> Table 3 of the PADI dive tables, in blue. Actual Bottom Time should never exceed the adjusted no decompression limit.
+
+|Decompression Diving
+|Diving that requires planning stops during ascent to prevent decompression sickness. In recreational diving (also called no decompression diving), a decompression stop is considered an emergency procedure and is never an intentional part of the dive plan.
+
+|No Decompression Limit (NDL)
+|The maximum time that can be spent at a particular depth before decompression stops are required. Can be found in <<Diagram_10>> in Table 1, at the end of each column, in black. For instance, the NDL at 10 metres is 219 minutes.
+
+|Pressure Group
+|A letter used in the PADI Recreational Dive Planner to label the amount of theoretical residual nitrogen left in your body.
+
+|Repetitive Dive
+|A dive that is made within six hours of a previous dive. There is still a significant amount of residual nitrogen in your body. Dives that are made six hours or more after the previous dive are classified as clean (new) dives.
+
+|Residual Nitrogen
+|The difference between the normal levels of nitrogen in your body and the elevated levels of nitrogen remaining in your body after a dive.
+
+|Residual Nitrogen Time (RNT)
+|An amount of nitrogen, represented in minutes, found in <<Diagram_11>> Table 3 with a pressure group letter and a specific depth (in the white area) to be added to the actual bottom time of a dive to account for the residual nitrogen from the previous dive. For instance, if the diver's pressure group at the end of the surface interval is "B" and he intends to dive to 10 metres, his RNT is 20 minutes.
+
+|Safety Stop
+|While ascending at the end of a dive, a stop is made between 3 and 6 metres - usually 5 metres for at least three minutes, for additional safety to allow more nitrogen to leave the body. The safety stop is recommended after all dives.
+
+|Surface Interval
+|The amount of time spent on the surface (land) between two dives, usually recorded in hours:minutes (E.g. 1:05 represents 1 hour, 5 minutes.) Used in <<Diagram_10>> Table 2, to determine the diver's pressure group status after a certain time on the surface. For instance, if the diver has a pressure group of "H" after a dive, and he spends 30 minutes resting on land before his next dive, his pressure group after his rest would be "D".
+
+|Total Bottom Time (TBT)
+|The sum of Residual Nitrogen Time and Actual Bottom Time after a repetitive dive, used in <<Diagram_10>> Table 1 to determine the pressure group after a repetitive dive.
+|===
+
 
 == FAQ [[FAQ]]
 
-Below are the few Frequently Asked Questions (FAQs). If your doubts are not addressed below, please feel free to post your doubts directly on our product https://github.com/CS2113-AY1819S1-W13-2/main[Git Page^].
+Below are a few Frequently Asked Questions (FAQs). If your doubts are not addressed below, please feel free to post your doubts directly on our product https://github.com/CS2113-AY1819S1-W13-2/main[Git Page^].
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Dive Log folder.
@@ -471,5 +560,79 @@ Below are the few Frequently Asked Questions (FAQs). If your doubts are not addr
 The Recreational Dive Planner Table is actually three tables linked together. Each of the three tables provides information for planning dives within accepted nitrogen levels.
 
 *Q*: Where can I find out more about PADI dive tables? [[PADI]] +
-*A*: The 36-page long Instructions for Use official document can be found https://elearning.padi.com/company0/tools/RDP%20InsforUseMet.pdf[Padi's Website].
+*A*: The 36-page long Instructions for Use official document can be found at https://elearning.padi.com/company0/tools/RDP%20InsforUseMet.pdf[Padi's Website].
 
+== Command Summary
+
+|===
+|Command |Command format and example
+
+|Help
+|`help`
+
+|Add
+|`add ds/DATE_STARTED ts/TIME_DIVE_STARTED de/DATE_ENDED te/TIME_DIVE_ENDED ss/SAFETY_STOP d/DEPTH l/LOCATION`
+ +
+ +
+ e.g. `add ds/04082018 ts/0900 de/04082018 te/1020 ss/1015 d/15 l/Bukit Lagoon tz/+8`
+
+|List
+| `list`
+
+|Edit
+|`edit INDEX [ds/DATE_STARTED] [ts/TIME_DIVE_STARTED] [de/DATE_ENDED] [te/TIME_DIVE_ENDED] [ss/SAFETY_STOP] [d/DEPTH] [l/LOCATION]`
+ +
+ +
+ e.g. `edit 1 d/8 l/Tioman`
+
+|Set display units
+|`set_units`
+ +
+ +
+ e.g. `set_units meters`
+
+|Find
+|`find KEYWORD [MORE_KEYWORDS]`
+ +
+ +
+ e.g.  `find Bali`
+
+|Delete
+|`delete INDEX`
+ +
+ +
+ e.g. `delete 2`
+
+|Select
+|`select INDEX`
+ +
+ +
+ e.g. `select 2`
+
+|History
+|`history`
+
+|Undo
+|`undo`
+
+|Redo
+|`redo`
+
+|Clear
+|`clear`
+
+|Current Pressure Group
+|`currentpg`
+ +
+ +
+ Alias: `cpg`
+
+|Planning mode
+|`newplan`
+
+|Normal mode
+|`normalmode`
+
+|Port planning mode to normal mode
+|`portover`
+|===

@@ -460,22 +460,24 @@ the underlying method calls for a `undo` method and decreases the counter. This 
 
 *** If the user decides to call `portover`, the counter is simply reset to 0 and the state of the machine is changed back to normal mode.
 
-*** *Pros:* Uses a method that is already present, `undo`. This means there won't be two implementations of the same method and follows the
-single responsibility principle.
-*** *Cons:*
+*** *Pros:* Uses a method that is already present, `undo`. This means there won't be two implementations of the same method.
+*** *Cons:* The limitations of this method lie in its sole ability to handle `add`, `delete` and `edit` commands in planning mode. Any other commands are not accepted.
 
 * **Alternative 2**: Create a temporary Stack to store commands instead of just a counter.
 ** Pros: All types of commands can now be used in planning mode, and not just `add`, `delete` and `edit`
 ** Cons: Extra implementations and considerations have to be taken into account. This might increase coupling between classes.
 // end::planning[]
+
 // tag::sorting[]
+
 === Sorting of data
 We have considered that once a user has a considerable number of dives registered in the app, the user would potentially have difficulty finding dives,
 even with the `find` function. (as many dives can have the same parameters such as location) To simplify the app usage, this command allows for users to decide the way
 that the data shown to them is organised.
 
 ==== Design Considerations
-* **Current implementation**:
+* **Current implementation**: A sort method with a time/date comparator is called every time a new dive is added, deleted
+or edited.
 
 * **Potential improvement to the feature 1**: Add a `sortby` CLI command.
 ** Method to implement: +
@@ -508,11 +510,15 @@ method after every add or edit command. You can also create a new event in commo
 ** Pros: Once implemented, to increase the number of parameters / methods to sort the data by, simply create a new corresponding comparator, add the respective prefixes the parse for, and to increase the number of parameters included in the Enum file.
 ** Cons: Can be troublesome to implement in the beginning.
 
-* **Potential improvement to the feature 2**: Reverse the current order by calling `reverseorder`
-** Method to implement: Simply reverse the comparator in the sorting methods, which is located in the
-** Pros: Improved usability
-** Cons: Increased difficulty to maintain
+
+**Potential improvement to the feature 2**: Reverse the current order by calling `reverseorder`
+
+** Method to implement: Simply reverse the comparator in the sorting methods, where comparators are stored in
+a sample method shown in Figure 12. (above)
+** Pros: Improved usability and thus better UX.
+** Cons: Increased difficulty to maintain as the
 // end::sorting[]
+
 // tag::newparam[]
 === New Parameters & conditions in a DiveSession
 
@@ -520,9 +526,11 @@ method after every add or edit command. You can also create a new event in commo
 Considering that users would dive in many different parts of the world, we have taken the effort to implement a Timezone parameter to ease users in adding new dives into the Dive Log without the need to convert any time to Local time. +
 We have decided to utilise the format of UTC, given its universal usage around the world. The UTC timezones range from -12 to +12, including 0. Singapore lies in the timezone of UTC+8.
 
-* **Alternative 1 (current choice)**: When calculating Pressure Groups using TimeZone
-** Pros:
-** Cons:
+* **Alternative 1 (current choice)**: When calculating Pressure Groups using TimeZone, all time is converted
+to UTC time before calculating duration, and subsequently pressure groups and its resultant results.
+** Pros: There is no confusion of timezones when doing complex calculations.
+** Cons: There is a need to convert time from UTC time back to local time. If not taken care of,
+inaccurate times may be shown.
 
 * **Alternative 2: ** Adopt Java SE 9's java.time library
 ** Pros: There are pre-built algorithms and methods in the library.
