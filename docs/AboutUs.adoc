@@ -26,7 +26,7 @@ Responsibilities: Pressure group calculation
 
 === Terrence Tan
 image::tttaus.png[width="150", align="left"]
-{empty}[http://github.com/tttaus[github]] [https://cs2113-ay1819s1-w13-2.github.io/main/team/TTTaus.html[Portfolio]] +
+{empty}[http://github.com/tttaus[github]] [https://cs2113-ay1819s1-w13-2.github.io/main/team/tttaus.html[Portfolio]] +
 Role: Developer +
 Responsibilities: Dive plot UI
 
