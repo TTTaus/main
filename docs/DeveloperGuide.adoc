@@ -817,39 +817,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 [cols="2,2,2,2", options="header"]
 .List of user stories
-|===// tag::dataencryption[]
+|=========================================
 |Priority |As a... |I want to... | So that I can...
-
-|`* * *`
-|Diver
-|Know my current pressure group
-|Plan my next dive safely
-
-|`* * *`
-|Diver
-|Add dive entries
-|So that I can know my pressure group.
-
-|`**`
-|Diver
-|Be able to enter data in local time
-|Save time when calculating my pressure groups.
-
-|`**`
-|Diver
-|Plan my dives ahead of performing them
-|So that I know what a safe limit is.
-
-|`*`
-|Diver
-|to see where I have been
-|Reminisce
-
-|`-`
-|Dive master
-|Check my dive buddy’s logs
-|Make sure all of us have a safe trip
-
+|`* * *` |Diver |Know my current pressure group |Plan my next dive safely
+|`* * *` |Diver |Add dive entries |So that I can know my pressure group.
+|`**` |Diver |Be able to enter data in local time |Save time when calculating my pressure groups.
+|`**` |Diver |Plan my dives ahead of performing them |So that I know what a safe limit is.
+|`*` |Diver |to see where I have been |Reminisce
+|`-` |Dive master |Check my dive buddy’s logs |Make sure all of us have a safe trip
+|=========================================
 [appendix]
 == Use Cases
 
@@ -1005,7 +981,7 @@ These instructions only provide a starting point for testers to work on; testers
 === A few things to note about dives
 
 The aim of this app is to make nitrogen level calculations of a diver very natural. As such testing the app requires
-certain understanding about dives. The [user guide] outlines the conditions under which dives may be
+certain understanding about dives. The https://github.com/CS2113-AY1819S1-W13-2/main/blob/master/docs/UserGuide.adoc[user guide] outlines the conditions under which dives may be
 rejected from being added to the system.
 
 === Deleting a diveSession
@@ -1026,39 +1002,4 @@ rejected from being added to the system.
 . Dealing with missing/corrupted data files
 
 .. Data is stored in the `data/` subdirectory of the current working directory.
-.. Corrupted data will cause the application to overwrite the file
-
-=== New Parameters in DiveSession
-==== ourDate (Date Start/ Date End)
-The ourDate Class consist of a String. When using the `add` or `edit` feature, the inputs will be parsed and checked to be a 8 digit String, in the format of _[DDMMYYYY]_ through `ParserUtils`. Only Integers will be accepted.
-
-Date Start and Date End will have prefixes `ds/` and `de/` respectively, and these prefixes will be used when using the `add` or `edit` feature.
-
-
-==== Timezone
-The timeZone class consists of a Integer (ranging from -12 to +12). This integer is dependent on the user input, which is the timezone in the format of UTC. If there are no integers in this string, there will be an exception thrown.
-
-Timezone will have prefix `tz/` which will be used when using the `add` or `edit` feature.
-
-
-=== Automatic Calculation of Pressure Group
-Takes into account the latest (in terms of time) Dive Session. Subtracting the current time from the latest dive, the method will be able to automatically calculate time until the current Pressure group will fall to the next group, which is the time until it is safe to dive again.
-
-==== Pressure Group
-Pressure group utilises a 3d Array in the form of `hashmap<int, hashmap<string, string>>`.
-Pressure groups range from A to Z. (i anyhow).
-
-==== CompareUtils
-CompareUtils is a helper method class implemented to assist with the automatic calculations of `PressureGroup`
-
-The current methods in this Class include:
-
-* `checkTimeDifference()` -- When 2 ourDate Strings and 2 time Strings parameters are passed, the method will return the time difference in number of minutes. This will be used in calculations
-
-* `convertTimetoLocal()` -- This method uses the new `timeZone` parameter in DiveSession to convert any time to local time, based on the timeZone value (in UTC).
-This method returns a long type of length 12, in the format of _[DDMMYYYYHHMM]_.
-
-* `getCurrentDateTime()` -- This method returns the current time in `Date` format
-* `getCurrentDateTimeLong()` -- This method returns the current time in `long` format, in _[DDMMYYYYHHMM]_
-* `readTimeFromLong` -- This method
-* `readDateFromLong()` -- This method
+.. Corrupted data will cause the application to overwrite the file.
